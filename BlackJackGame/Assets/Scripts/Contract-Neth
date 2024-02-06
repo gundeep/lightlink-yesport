@@ -1,0 +1,29 @@
+using Nethereum.Web3;
+using Nethereum.Hex.HexTypes;
+using System.Threading.Tasks;
+using UnityEngine;
+
+public class ContractInteractor : MonoBehaviour
+{
+    private string url = "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"; // Replace with your Infura URL
+    private string contractAddress = "0xYourContractAddress"; // Replace with your contract address
+    private string privateKey = "YourPrivateKey"; // Replace with your private key
+
+    private async Task CallContractFunction()
+    {
+        var web3 = new Web3(url);
+        var contract = web3.Eth.GetContract(ABI, contractAddress);
+
+        var function = contract.GetFunction("YourFunctionName"); // Replace with your function name
+
+        // Call the function with your parameters
+        var result = await function.CallAsync<YourReturnType>("YourParameters"); // Replace with your parameters and return type
+
+        Debug.Log("Function result: " + result);
+    }
+
+    void Start()
+    {
+        CallContractFunction();
+    }
+}
